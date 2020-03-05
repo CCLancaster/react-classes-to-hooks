@@ -1,19 +1,21 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 
-class Input extends Component {
-    constructor(props) {
-        super(props);
+function Input(props) {
+    let [newtask, setNewtask] = useState('');
+    let trackNewTask = (e) => {
+        console.log(newtask);
+        setNewtask(e.target.value)
     }
 
-    render() {
-        return (
-            <div>
-                <label>Input Task: </label>
-                <input type="text" name="task" />
-                <button onClick={this.props.onClick}>Add</button>
-            </div>
-        )
-    }
+    return (
+        <div>
+            <label>Input Task: </label>
+            <input type="text" name="task" onChange={trackNewTask} />
+            <button onClick={(e) => {
+                props.onClick(e, newtask);
+            }}>Add</button>
+        </div>
+    )
 }
 
 export default Input;
